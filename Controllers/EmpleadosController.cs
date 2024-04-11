@@ -11,11 +11,13 @@ namespace MvcApiClientOAuth.Controllers
         {
             this.service = service;
         }
+        [AuthorizeEmpleados]
         public async Task<IActionResult> Index()
         {
             List<Empleado> empleados = await this.service.GetEmpleadosAsync();
             return View(empleados);
         }
+        [AuthorizeEmpleados]
         public async Task<IActionResult> Details(int id)
         {
             string token = HttpContext.Session.GetString("TOKEN");
