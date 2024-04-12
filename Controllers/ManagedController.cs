@@ -38,7 +38,8 @@ namespace MvcApiClientOAuth.Controllers
                     ClaimTypes.Name, ClaimTypes.Role);
                 identity.AddClaim(new Claim(ClaimTypes.Name, model.UserName));
                 identity.AddClaim(new Claim(ClaimTypes.NameIdentifier, model.Password));
-
+                //Para no usar session
+                identity.AddClaim(new Claim("TOKEN", token));
                 ClaimsPrincipal userPrincipal = new ClaimsPrincipal(identity);
 
                 await HttpContext.SignInAsync(CookieAuthenticationDefaults.AuthenticationScheme, userPrincipal, new AuthenticationProperties

@@ -17,6 +17,8 @@ builder.Services.AddAuthentication(
 // Add services to the container.
 builder.Services.AddTransient<ServiceApiEmpleados>();
 builder.Services.AddDistributedMemoryCache();
+//Para recoger el token
+builder.Services.AddHttpContextAccessor();
 builder.Services.AddSession(options =>
 {
     options.IdleTimeout = TimeSpan.FromMinutes(30);
