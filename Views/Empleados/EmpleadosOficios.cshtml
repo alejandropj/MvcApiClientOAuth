@@ -1,13 +1,31 @@
 ﻿@model IEnumerable<MvcApiClientOAuth.Models.Empleado>
 
 @{
-    ViewData["Title"] = "Index";
+    ViewData["Title"] = "EmpleadosOficios";
+    List<string> oficios = ViewData["OFICIOS"] as List<string>;
 }
 
-<h1>Lista de empleados</h1>
-<a asp-action="EmpleadosOficios">Ir a Empleados Oficio</a>
+<h1>EmpleadosOficios</h1>
 
+<form method="post">
+    <label>Seleccione oficios</label>
+    <select name="oficio" size="5" multiple class="form-control">
+        @foreach(string ofi in oficios)
+        {
+            <option value="@ofi">@ofi</option>
+        }
+    </select>
+    <label>Incremento salarial</label>
+    <input type="text" name="incremento" class="form-control" />
+    <button class="btn btn-outline-dark" name="accion" value="read">
+        Mostrar empleados
+    </button>
+    <button class="btn btn-outline-warning" name="accion" value="update">
+        Incrementar salarios
+    </button>
+</form>
 
+@if(Model!=null){
 <table class="table">
     <thead>
         <tr>
@@ -26,7 +44,6 @@
             <th>
                 @Html.DisplayNameFor(model => model.IdDepartamento)
             </th>
-            <th></th>
         </tr>
     </thead>
     <tbody>
@@ -47,11 +64,8 @@
             <td>
                 @Html.DisplayFor(modelItem => item.IdDepartamento)
             </td>
-            <td>
-                
-                @Html.ActionLink("Detalle de empleado", "Details", new { id=item.IdEmpleado }) 
-            </td>
         </tr>
 }
     </tbody>
 </table>
+}
